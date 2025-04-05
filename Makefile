@@ -3,7 +3,7 @@ SERVER_NAME = server
 CLIENT_NAME = client
 
 # Compiler and flags
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror
 
 # Sources and objects

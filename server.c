@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:39 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/05 17:48:34 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/05 17:58:32 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ static void	handle_signal(int signum, siginfo_t *info, void *context)
 		
 		g_data.bit_position = 0;
 		g_data.current_char = 0;
-		
-		// Send acknowledgment signal to client
-		kill(g_data.client_pid, SIGUSR1);
 	}
+	
+	// Envoyer l'accusé de réception après chaque bit, pas seulement après un caractère complet
+	kill(g_data.client_pid, SIGUSR1);
 }
 
 /**
