@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 16:59:10 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/04 12:49:07 by pgavel           ###   ########.fr       */
+/*   Created: 2024/11/26 16:58:58 by pgavel            #+#    #+#             */
+/*   Updated: 2025/04/05 17:45:03 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "minitalk.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-	int	len;
-
-	if (!s)
-		return ;
-	len = 0;
-	while (s[len])
-		len++;
-	write(fd, s, len);
+	write(fd, &c, 1);
 }

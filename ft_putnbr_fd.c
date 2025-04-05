@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 13:26:31 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/03 19:24:24 by pgavel           ###   ########.fr       */
+/*   Created: 2024/11/26 16:59:06 by pgavel            #+#    #+#             */
+/*   Updated: 2025/04/05 17:44:59 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "minitalk.h"
 
-int	ft_isdigit(int c)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	return (c >= '0' && c <= '9');
+	long	tmp;
+
+	tmp = nb;
+	if (nb < 0)
+	{
+		ft_putchar_fd('-', fd);
+		tmp = -nb;
+	}
+	if (tmp > 9)
+	{
+		ft_putnbr_fd(tmp / 10, fd);
+	}
+	ft_putchar_fd((tmp % 10 + '0'), fd);
 }
