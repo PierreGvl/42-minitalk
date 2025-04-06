@@ -6,30 +6,29 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:25 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 10:24:07 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 11:27:44 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-
-// static t_client_data	g_client_data;
+#include "../includes/minitalk.h"
 
 static int	g_bit_received;
 
-/*
-static void	handle_ack(int signum)
+static void	sig_handler()
 {
-	(void)signum;
-	g_client_data.ack_received = 1;
+	g_bit_received = 1;
 }
-*/
 
-static void	sig_handler(int sig)
+static int check_pid(char *pid_str)
 {
-	if (sig == SIGUSR1)
-		g_bit_received = 1;
-	else if (sig == SIGUSR2)
-		ft_putstr_fd("OK",1);
+    int pid;
+	
+	pid = ft_atoi(pid_str);
+
+	if (kill(pid, 0) == -1)
+		return (0);
+ 
+    return (pid);
 }
 
 static void	send_char(pid_t server_pid, unsigned char c)
@@ -40,7 +39,6 @@ static void	send_char(pid_t server_pid, unsigned char c)
 	i = 0;
 	while (i < 8)
 	{
-		//g_client_data.ack_received = 0;
 		g_bit_received = 0;
 		bit = (c >> i) & 1;
 		if (bit == 0)
@@ -53,17 +51,12 @@ static void	send_char(pid_t server_pid, unsigned char c)
 			if (kill(server_pid, SIGUSR2) == -1)
 				ft_error("Error sending signal to server");
 		}
-		
-		// Wait for acknowledgment before sending next bit
 		while (g_bit_received == 0)
 			usleep(100);
 		i++;
 	}
 }
 
-/**
- * Send a string to the server, character by character
- */
 static void	send_string(pid_t server_pid, char *str)
 {
 	size_t	i;
@@ -77,18 +70,6 @@ static void	send_string(pid_t server_pid, char *str)
 	// Send null terminator to indicate end of string
 	send_char(server_pid, 0);
 }
-/*
-static void	setup_signals(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = handle_ack;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	
-	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		ft_error("Error setting up signal handler");
-}*/
 
 int	main(int argc, char **argv)
 {
@@ -97,12 +78,10 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		ft_error("Usage: ./client [server_pid] [message]");
 
-	server_pid = ft_atoi(argv[1]);
-	if (server_pid <= 0)
+	server_pid = check_pid(argv[1]);
+	if (!server_pid)
 		ft_error("Invalid server PID");
 
-	//g_client_data.ack_received = 0;
-	//setup_signals();
 	g_bit_received = 0;
 	signal(SIGUSR1, sig_handler);
 	

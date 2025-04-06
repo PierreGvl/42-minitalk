@@ -6,11 +6,11 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:39 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 09:38:43 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 11:27:49 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../includes/minitalk.h"
 
 static t_data	g_data;
 
@@ -27,31 +27,24 @@ static void	handle_signal(int signum, siginfo_t *info, void *context)
 
 	if (g_data.client_pid == 0)
 		g_data.client_pid = info->si_pid;
-
 	if (g_data.client_pid != info->si_pid)
 	{
 		g_data.client_pid = info->si_pid;
 		g_data.bit_position = 0;
 		g_data.current_char = 0;
 	}
-
 	if (signum == SIGUSR2)
 		g_data.current_char |= (1 << g_data.bit_position);
-
 	g_data.bit_position++;
-
 	if (g_data.bit_position == 8)
 	{
 		if (g_data.current_char == 0)
 			ft_putchar_fd('\n', 1);
 		else
 			ft_putchar_fd(g_data.current_char, 1);
-		
 		g_data.bit_position = 0;
 		g_data.current_char = 0;
 	}
-	
-	// Envoyer l'accusé de réception après chaque bit, pas seulement après un caractère complet
 	kill(g_data.client_pid, SIGUSR1);
 }
 

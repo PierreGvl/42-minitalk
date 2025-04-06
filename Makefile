@@ -1,48 +1,45 @@
-# Project names
-SERVER_NAME = server
-CLIENT_NAME = client
-
-# Compiler and flags
-CC = clang
+NAME_CLIENT = client
+NAME_SERVER = server
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-# Sources and objects
-SERVER_SRC = server.c utils.c
-CLIENT_SRC = client.c utils.c
+SRC_DIR = src/
+LIB_DIR = lib/
+INCLUDES = includes/
 
-SERVER_OBJ = $(SERVER_SRC:.c=.o)
-CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
+SRC_CLIENT = $(SRC_DIR)client.c
+SRC_SERVER = $(SRC_DIR)server.c
 
-# Include directory
-INCLUDE = -I.
+LIB_SRC = $(LIB_DIR)ft_putchar_fd.c \
+          $(LIB_DIR)ft_putstr_fd.c \
+          $(LIB_DIR)ft_putnbr_fd.c \
+          $(LIB_DIR)ft_putendl_fd.c \
+          $(LIB_DIR)ft_isdigit.c \
+          $(LIB_DIR)ft_atoi.c \
+          $(LIB_DIR)ft_strlen.c \
+          $(LIB_DIR)ft_error.c
 
-# Rules
-all: $(SERVER_NAME) $(CLIENT_NAME)
+OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
+OBJ_SERVER = $(SRC_SERVER:.c=.o)
+OBJ_LIB = $(LIB_SRC:.c=.o)
 
-# Compile server
-$(SERVER_NAME): $(SERVER_OBJ)
-	$(CC) $(CFLAGS) $(SERVER_OBJ) -o $(SERVER_NAME)
+all: $(NAME_CLIENT) $(NAME_SERVER)
 
-# Compile client
-$(CLIENT_NAME): $(CLIENT_OBJ)
-	$(CC) $(CFLAGS) $(CLIENT_OBJ) -o $(CLIENT_NAME)
+$(NAME_CLIENT): $(OBJ_CLIENT) $(OBJ_LIB)
+	$(CC) $(CFLAGS) -o $(NAME_CLIENT) $(OBJ_CLIENT) $(OBJ_LIB)
 
-# Compile objects
+$(NAME_SERVER): $(OBJ_SERVER) $(OBJ_LIB)
+	$(CC) $(CFLAGS) -o $(NAME_SERVER) $(OBJ_SERVER) $(OBJ_LIB)
+
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean objects
 clean:
-	rm -f $(SERVER_OBJ) $(CLIENT_OBJ)
+	rm -f $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_LIB)
 
-# Clean objects and executables
 fclean: clean
-	rm -f $(SERVER_NAME) $(CLIENT_NAME)
+	rm -f $(NAME_CLIENT) $(NAME_SERVER)
 
-# Clean and rebuild
 re: fclean all
 
-# Bonus part
-bonus: all
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
