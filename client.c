@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:25 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/05 17:49:30 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 08:57:51 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	send_char(pid_t server_pid, unsigned char c)
 		// Wait for acknowledgment before sending next bit
 		while (g_client_data.ack_received == 0)
 			usleep(100);
-		
 		i++;
 	}
 }
@@ -84,7 +83,10 @@ static void	setup_signals(void)
 	sigemptyset(&sa.sa_mask);
 	
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		exit_error("Error setting up signal handler");
+	{
+		ft_putstr_fd("Error setting up signal handler\n", 2);
+		exit(EXIT_FAILURE);
+	}
 }
 
 int	main(int argc, char **argv)
