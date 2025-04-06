@@ -83,7 +83,7 @@ int	ft_atoi(const char *str)
 /**
  * Fonction d'erreur
  */
-void	exit_error(char *message)
+void	ft_error(char *message)
 {
 	ft_putstr_fd(message, 2);
 	ft_putchar_fd('\n', 2);

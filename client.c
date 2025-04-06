@@ -6,26 +6,32 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:25 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 08:57:51 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 10:24:07 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static t_client_data	g_client_data;
+// static t_client_data	g_client_data;
 
-/**
- * Handle acknowledgment signal from server
- */
+static int	g_bit_received;
+
+/*
 static void	handle_ack(int signum)
 {
 	(void)signum;
 	g_client_data.ack_received = 1;
 }
+*/
 
-/**
- * Send a single character to the server, bit by bit
- */
+static void	sig_handler(int sig)
+{
+	if (sig == SIGUSR1)
+		g_bit_received = 1;
+	else if (sig == SIGUSR2)
+		ft_putstr_fd("OK",1);
+}
+
 static void	send_char(pid_t server_pid, unsigned char c)
 {
 	int	bit;
@@ -34,21 +40,22 @@ static void	send_char(pid_t server_pid, unsigned char c)
 	i = 0;
 	while (i < 8)
 	{
-		g_client_data.ack_received = 0;
+		//g_client_data.ack_received = 0;
+		g_bit_received = 0;
 		bit = (c >> i) & 1;
 		if (bit == 0)
 		{
 			if (kill(server_pid, SIGUSR1) == -1)
-				exit_error("Error sending signal to server");
+				ft_error("Error sending signal to server");
 		}
 		else
 		{
 			if (kill(server_pid, SIGUSR2) == -1)
-				exit_error("Error sending signal to server");
+				ft_error("Error sending signal to server");
 		}
 		
 		// Wait for acknowledgment before sending next bit
-		while (g_client_data.ack_received == 0)
+		while (g_bit_received == 0)
 			usleep(100);
 		i++;
 	}
@@ -70,10 +77,7 @@ static void	send_string(pid_t server_pid, char *str)
 	// Send null terminator to indicate end of string
 	send_char(server_pid, 0);
 }
-
-/**
- * Set up the signal handler for acknowledgment
- */
+/*
 static void	setup_signals(void)
 {
 	struct sigaction	sa;
@@ -83,31 +87,25 @@ static void	setup_signals(void)
 	sigemptyset(&sa.sa_mask);
 	
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-	{
-		ft_putstr_fd("Error setting up signal handler\n", 2);
-		exit(EXIT_FAILURE);
-	}
-}
+		ft_error("Error setting up signal handler");
+}*/
 
 int	main(int argc, char **argv)
 {
 	pid_t	server_pid;
 
 	if (argc != 3)
-	{
-		ft_putstr_fd("Usage: ./client [server_pid] [message]\n", 2);
-		return (EXIT_FAILURE);
-	}
+		ft_error("Usage: ./client [server_pid] [message]");
 
 	server_pid = ft_atoi(argv[1]);
 	if (server_pid <= 0)
-	{
-		ft_putstr_fd("Invalid server PID\n", 2);
-		return (EXIT_FAILURE);
-	}
+		ft_error("Invalid server PID");
 
-	g_client_data.ack_received = 0;
-	setup_signals();
+	//g_client_data.ack_received = 0;
+	//setup_signals();
+	g_bit_received = 0;
+	signal(SIGUSR1, sig_handler);
+	
 	send_string(server_pid, argv[2]);
 	
 	return (0);

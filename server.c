@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:39 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/05 17:58:32 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 09:38:43 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static t_data	g_data;
 
-/**
- * Initializes the global data structure.
- */
 static void	init_data(void)
 {
 	g_data.bit_position = 0;
@@ -24,11 +21,6 @@ static void	init_data(void)
 	g_data.client_pid = 0;
 }
 
-/**
- * Handle the signal received from client
- * SIGUSR1 represents a bit value of 0
- * SIGUSR2 represents a bit value of 1
- */
 static void	handle_signal(int signum, siginfo_t *info, void *context)
 {
 	(void)context;
@@ -63,9 +55,6 @@ static void	handle_signal(int signum, siginfo_t *info, void *context)
 	kill(g_data.client_pid, SIGUSR1);
 }
 
-/**
- * Set up the signal handler
- */
 static void	setup_signals(void)
 {
 	struct sigaction	sa;
@@ -75,16 +64,10 @@ static void	setup_signals(void)
 	sigemptyset(&sa.sa_mask);
 	
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-	{
-		ft_putstr_fd("Error setting up SIGUSR1 handler\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		ft_error("Error setting up SIGUSR1 handler");
 	
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-	{
-		ft_putstr_fd("Error setting up SIGUSR2 handler\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		ft_error("Error setting up SIGUSR2 handler");
 }
 
 int	main(void)
