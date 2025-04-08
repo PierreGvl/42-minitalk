@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:59:10 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/04 00:02:07 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:19:55 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	ft_putstr_fd(char *s, int fd)
 
 	if (!s)
 		return ;
-	
 	len = 0;
 	while (s[len])
 		len++;
-	
 	write(fd, s, len);
 }

@@ -6,12 +6,14 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:55 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 11:16:27 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:34:45 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
+
+# define _GNU_SOURCE
 
 # include <signal.h>
 # include <stdlib.h>

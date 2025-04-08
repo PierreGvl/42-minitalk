@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:39 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 11:27:49 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:32:55 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	init_data(void)
 static void	handle_signal(int signum, siginfo_t *info, void *context)
 {
 	(void)context;
-
 	if (g_data.client_pid == 0)
 		g_data.client_pid = info->si_pid;
 	if (g_data.client_pid != info->si_pid)
@@ -55,10 +54,8 @@ static void	setup_signals(void)
 	sa.sa_sigaction = handle_signal;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_error("Error setting up SIGUSR1 handler");
-	
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
 		ft_error("Error setting up SIGUSR2 handler");
 }
@@ -67,13 +64,10 @@ int	main(void)
 {
 	init_data();
 	setup_signals();
-	
 	ft_putstr_fd("Server PID: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-	
 	while (1)
 		pause();
-	
 	return (0);
 }
