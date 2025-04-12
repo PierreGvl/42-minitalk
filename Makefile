@@ -3,25 +3,25 @@ NAME_SERVER = server
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_DIR = src/
-LIB_DIR = lib/
-INCLUDES = inc/
+DIR_SRC = src/
+DIR_LIB = lib/
+DIR_INC = inc/
 
-SRC_CLIENT = $(SRC_DIR)client.c
-SRC_SERVER = $(SRC_DIR)server.c
+SRC_CLIENT = $(DIR_SRC)client.c
+SRC_SERVER = $(DIR_SRC)server.c
 
-LIB_SRC = $(LIB_DIR)ft_putchar_fd.c \
-          $(LIB_DIR)ft_putstr_fd.c \
-          $(LIB_DIR)ft_putnbr_fd.c \
-          $(LIB_DIR)ft_putendl_fd.c \
-          $(LIB_DIR)ft_isdigit.c \
-          $(LIB_DIR)ft_atoi.c \
-          $(LIB_DIR)ft_strlen.c \
-          $(LIB_DIR)ft_error.c
+SRC_LIB = $(DIR_LIB)ft_putchar_fd.c \
+          $(DIR_LIB)ft_putstr_fd.c \
+          $(DIR_LIB)ft_putnbr_fd.c \
+          $(DIR_LIB)ft_putendl_fd.c \
+          $(DIR_LIB)ft_isdigit.c \
+          $(DIR_LIB)ft_atoi.c \
+          $(DIR_LIB)ft_strlen.c \
+          $(DIR_LIB)ft_error.c
 
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 OBJ_SERVER = $(SRC_SERVER:.c=.o)
-OBJ_LIB = $(LIB_SRC:.c=.o)
+OBJ_LIB = $(SRC_LIB:.c=.o)
 
 all: $(NAME_CLIENT) $(NAME_SERVER)
 
