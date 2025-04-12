@@ -6,11 +6,11 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:26:10 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 11:27:24 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/09 01:58:38 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../inc/minitalk.h"
 
 int	ft_atoi(const char *str)
 {

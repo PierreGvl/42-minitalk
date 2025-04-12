@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = src/
 LIB_DIR = lib/
-INCLUDES = includes/
+INCLUDES = inc/
 
 SRC_CLIENT = $(SRC_DIR)client.c
 SRC_SERVER = $(SRC_DIR)server.c
