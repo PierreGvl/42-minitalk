@@ -6,13 +6,20 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:39 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/14 14:26:33 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:18:31 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minitalk.h"
 
 static t_data	g_data;
+
+static void	init_data(void)
+{
+	g_data.bit_position = 0;
+	g_data.current_char = 0;
+	g_data.client_pid = 0;
+}
 
 static void	handle_signal(int signum, siginfo_t *info, void *context)
 {
@@ -51,13 +58,6 @@ static void	setup_signals(void)
 		ft_error("Error setting up SIGUSR1 handler");
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
 		ft_error("Error setting up SIGUSR2 handler");
-}
-
-static void	init_data(void)
-{
-	g_data.bit_position = 0;
-	g_data.current_char = 0;
-	g_data.client_pid = 0;
 }
 
 int	main(void)
