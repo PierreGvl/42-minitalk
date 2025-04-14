@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:59:06 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/09 01:59:06 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:58:36 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_putnbr_fd(int nb, int fd)
 	if (nb < 0)
 	{
 		ft_putchar_fd('-', fd);
-		tmp = -nb;
+		tmp = -tmp;
 	}
 	if (tmp > 9)
 	{
