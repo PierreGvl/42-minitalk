@@ -6,11 +6,11 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:59:06 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/14 18:58:36 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/14 21:30:56 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minitalk.h"
+#include "minitalk.h"
 
 void	ft_putnbr_fd(int nb, int fd)
 {

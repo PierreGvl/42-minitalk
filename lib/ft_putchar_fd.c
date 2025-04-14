@@ -6,11 +6,11 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:58:58 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/09 01:58:57 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/14 21:30:53 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minitalk.h"
+#include "minitalk.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

@@ -1,7 +1,7 @@
 NAME_CLIENT = client
 NAME_SERVER = server
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I$(DIR_INC)
 
 DIR_SRC = src/
 DIR_LIB = lib/

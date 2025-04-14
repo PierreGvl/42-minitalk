@@ -6,11 +6,11 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:39 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/14 17:18:31 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/14 21:31:09 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minitalk.h"
+#include "minitalk.h"
 
 static t_data	g_data;
 

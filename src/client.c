@@ -6,11 +6,11 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:25 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/14 14:26:20 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/14 21:31:05 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minitalk.h"
+#include "minitalk.h"
 
 static int	g_bit_received;
 
