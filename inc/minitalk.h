@@ -6,7 +6,7 @@
 /*   By: pgavel <pgavel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 19:01:55 by pgavel            #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:45 by pgavel           ###   ########.fr       */
+/*   Updated: 2025/04/12 16:44:15 by pgavel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_atoi(const char *str);
 size_t	ft_strlen(const char *s);
-
 void	ft_error(char *message);
 
 #endif
