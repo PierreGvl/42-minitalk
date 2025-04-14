@@ -12,10 +12,7 @@ SRC_SERVER =	$(DIR_SRC)server.c
 SRC_LIB =	$(DIR_LIB)ft_putchar_fd.c \
         	$(DIR_LIB)ft_putstr_fd.c \
         	$(DIR_LIB)ft_putnbr_fd.c \
-        	$(DIR_LIB)ft_putendl_fd.c \
-        	$(DIR_LIB)ft_isdigit.c \
         	$(DIR_LIB)ft_atoi.c \
-        	$(DIR_LIB)ft_strlen.c \
         	$(DIR_LIB)ft_error.c
 
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
